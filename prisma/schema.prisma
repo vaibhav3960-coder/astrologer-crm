@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Client {
+  id        String   @id @default(cuid())
+  name      String
+  email     String?  @unique
+  phone     String?
+  dob       DateTime?
+  tob       String?  // Time of birth, e.g., "14:30"
+  pob       String?  // Place of birth
+  zodiacSign String?
+  sunSign    String?
+  moonSign   String?
+  risingSign String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  consultations Consultation[]
+  remedies      Remedy[]
+  payments      Payment[]
+}
+
+model Consultation {
+  id        String   @id @default(cuid())
+  clientId  String
+  client    Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  date      DateTime
+  type      String   // e.g., "Kundli Reading", "Tarot", "General"
+  notes     String?
+  status    String   @default("SCHEDULED") // SCHEDULED, COMPLETED, CANCELLED
+  revenue   Float?   @default(0.0)
+  paymentStatus String @default("PAID") // PAID, UNPAID
+  remedyGiven String?
+  followUp  DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Remedy {
+  id        String   @id @default(cuid())
+  clientId  String
+  client    Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  type      String   // Gemstone, Mantra, Puja, Fasting
+  name      String
+  status    String   @default("ACTIVE") // ACTIVE, COMPLETED
+  assignedAt DateTime @default(now())
+  reviewDate DateTime?
+}
+
+model Payment {
+  id        String   @id @default(cuid())
+  clientId  String
+  client    Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  amount    Float
+  date      DateTime @default(now())
+  status    String   @default("COMPLETED")
+}

@@ -1,0 +1,78 @@
+.grid {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.calendarWrapper {
+  padding: 1.5rem;
+}
+
+.listWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+/* React Calendar Overrides */
+.calendar {
+  width: 100% !important;
+  background: transparent !important;
+  border: none !important;
+  color: var(--foreground) !important;
+  font-family: inherit !important;
+}
+
+.calendar button {
+  color: var(--foreground) !important;
+}
+
+.calendar button:disabled {
+  opacity: 0.3;
+}
+
+.calendar .react-calendar__navigation button:hover {
+  background: rgba(255,255,255,0.1) !important;
+}
+
+.calendar .react-calendar__tile:hover {
+  background: rgba(255,255,255,0.1) !important;
+  border-radius: 8px;
+}
+
+.calendar .react-calendar__tile--active {
+  background: var(--primary) !important;
+  color: var(--background) !important;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.calendar .react-calendar__tile--active:hover {
+  background: var(--primary-light) !important;
+}
+
+.hasConsultation {
+  position: relative;
+}
+
+.hasConsultation::after {
+  content: '';
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background-color: var(--primary-gold);
+  border-radius: 50%;
+}
+
+.calendar .react-calendar__tile--active.hasConsultation::after {
+  background-color: var(--background);
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
