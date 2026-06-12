@@ -1,10 +1,6 @@
 import { Download } from "lucide-react";
-import { PrismaClient } from "@/generated/prisma/client";
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
+import { prisma } from "@/lib/prisma";
 import ReportsCharts from "@/components/reports/ReportsCharts";
-
-const adapter = new PrismaBetterSqlite3({ url: 'file:./dev.db' });
-const prisma = new PrismaClient({ adapter });
 
 export default async function ReportsPage() {
   const clients = await prisma.client.findMany();

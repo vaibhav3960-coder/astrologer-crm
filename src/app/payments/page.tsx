@@ -1,11 +1,7 @@
-import { PrismaClient } from "@/generated/prisma/client";
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
 import { IndianRupee, Download, ArrowUpRight, Clock } from "lucide-react";
 import AddPaymentModal from "@/components/payments/AddPaymentModal";
 import MarkPaidButton from "@/components/payments/MarkPaidButton";
-
-const adapter = new PrismaBetterSqlite3({ url: 'file:./dev.db' });
-const prisma = new PrismaClient({ adapter });
+import { prisma } from "@/lib/prisma";
 
 export default async function PaymentsPage() {
   const clients = await prisma.client.findMany({ orderBy: { name: 'asc' } });

@@ -1,10 +1,7 @@
-import { PrismaClient } from "@/generated/prisma/client";
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
+import { prisma } from "@/lib/prisma";
 import AddClientModal from "@/components/clients/AddClientModal";
 import ClientsDataTable from "@/components/clients/ClientsDataTable";
 
-const adapter = new PrismaBetterSqlite3({ url: 'file:./dev.db' });
-const prisma = new PrismaClient({ adapter });
 
 export default async function ClientsPage() {
   const clients = await prisma.client.findMany({

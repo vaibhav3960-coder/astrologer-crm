@@ -1,11 +1,7 @@
-import { PrismaClient } from "@/generated/prisma/client";
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
+import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import AddRemedyModal from "@/components/remedies/AddRemedyModal";
 import RemediesFilterableList from "@/components/remedies/RemediesFilterableList";
-
-const adapter = new PrismaBetterSqlite3({ url: 'file:./dev.db' });
-const prisma = new PrismaClient({ adapter });
 
 export default async function RemediesPage() {
   const remedies = await prisma.remedy.findMany({
