@@ -1,6 +1,10 @@
 # 🪐 Humara Pandit — Astrologer CRM
 
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen.svg)](https://astrologer-crm-lac.vercel.app)
+
 A full-stack, production-ready **Customer Relationship Management (CRM)** system built specifically for professional astrologers. Manage clients, schedule consultations, track payments, and generate Vedic birth charts — all in one premium dark-themed dashboard.
+
+🔗 **Live Demo:** [astrologer-crm-lac.vercel.app](https://astrologer-crm-lac.vercel.app)
 
 ---
 
@@ -59,10 +63,10 @@ A full-stack, production-ready **Customer Relationship Management (CRM)** system
 
 | Layer | Technology |
 |---|---|
-| Framework | [Next.js 14](https://nextjs.org/) (App Router) |
+| Framework | [Next.js 16](https://nextjs.org/) (App Router) |
 | Language | TypeScript |
 | Styling | Vanilla CSS + CSS Modules |
-| Database | SQLite (via `better-sqlite3`) |
+| Database | SQLite |
 | ORM | [Prisma](https://www.prisma.io/) |
 | Charts | [Recharts](https://recharts.org/) |
 | Calendar | [react-calendar](https://github.com/wojtekmaj/react-calendar) |
