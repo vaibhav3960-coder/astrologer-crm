@@ -24,3 +24,11 @@ export async function createConsultation(formData: FormData) {
 
   revalidatePath("/consultations");
 }
+
+export async function completeConsultation(id: string) {
+  await prisma.consultation.update({
+    where: { id },
+    data: { status: 'COMPLETED' },
+  });
+  revalidatePath("/consultations");
+}

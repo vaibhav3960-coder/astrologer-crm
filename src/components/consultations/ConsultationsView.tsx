@@ -5,6 +5,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { isSameDay } from "date-fns";
 import styles from "./ConsultationsView.module.css";
+import CompleteConsultationButton from "./CompleteConsultationButton";
 
 export default function ConsultationsView({ consultations }: { consultations: any[] }) {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
@@ -58,9 +59,12 @@ export default function ConsultationsView({ consultations }: { consultations: an
                       <div style={{ opacity: 0.8 }}>with {c.client.name}</div>
                     </div>
                   </div>
-                  <span style={{ fontSize: '0.75rem', padding: '0.25rem 0.75rem', borderRadius: '999px', background: `rgba(255,255,255,0.1)`, color: getStatusColor(c.status), border: `1px solid ${getStatusColor(c.status)}` }}>
-                    {c.status}
-                  </span>
+                  <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                    <CompleteConsultationButton id={c.id} currentStatus={c.status} />
+                    <span style={{ fontSize: '0.75rem', padding: '0.25rem 0.75rem', borderRadius: '999px', background: `rgba(255,255,255,0.1)`, color: getStatusColor(c.status), border: `1px solid ${getStatusColor(c.status)}` }}>
+                      {c.status}
+                    </span>
+                  </div>
                 </div>
                 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', background: 'rgba(255,255,255,0.03)', padding: '1rem', borderRadius: '8px' }}>

@@ -30,9 +30,13 @@ export async function createClient(formData: FormData) {
       name,
       email: email || null,
       phone: phone || null,
-      dob,
+      dob: dob ? new Date(dob) : null,
       tob: tob || null,
       pob: pob || null,
+      zodiacSign: zodiacSign || null,
+      sunSign: sunSign || null,
+      moonSign: moonSign || null,
+      risingSign: risingSign || null,
     }
   });
 

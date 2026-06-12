@@ -1,11 +1,14 @@
 import { PrismaClient } from "@/generated/prisma/client";
 import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
 import { IndianRupee, Download, ArrowUpRight, Clock } from "lucide-react";
+import AddPaymentModal from "@/components/payments/AddPaymentModal";
+import MarkPaidButton from "@/components/payments/MarkPaidButton";
 
 const adapter = new PrismaBetterSqlite3({ url: 'file:./dev.db' });
 const prisma = new PrismaClient({ adapter });
 
 export default async function PaymentsPage() {
+  const clients = await prisma.client.findMany({ orderBy: { name: 'asc' } });
   const consultations = await prisma.consultation.findMany({
     where: { revenue: { gt: 0 } },
     include: { client: true },
@@ -32,6 +35,8 @@ export default async function PaymentsPage() {
           Export Invoice
         </button>
       </div>
+
+      <AddPaymentModal clients={clients} />
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.5rem', marginBottom: '2rem' }}>
         <div className="glass" style={{ padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -85,7 +90,8 @@ export default async function PaymentsPage() {
                   <td style={{ padding: '1rem', fontWeight: '500' }}>{c.client.name}</td>
                   <td style={{ padding: '1rem', opacity: 0.8 }}>{c.type}</td>
                   <td style={{ padding: '1rem', color: 'var(--primary-light)', fontWeight: 'bold' }}>₹{c.revenue?.toLocaleString('en-IN')}</td>
-                  <td style={{ padding: '1rem' }}>
+                  <td style={{ padding: '1rem', display: 'flex', alignItems: 'center' }}>
+                    <MarkPaidButton id={c.id} paymentStatus={c.paymentStatus} />
                     {c.paymentStatus === 'PAID' ? (
                       <span style={{ fontSize: '0.75rem', padding: '0.2rem 0.5rem', background: 'rgba(34, 197, 94, 0.2)', color: '#4ade80', borderRadius: '4px' }}>Paid</span>
                     ) : (

@@ -2,11 +2,20 @@
 
 import Link from "next/link";
 import { Plus } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export default function FloatingActionButton() {
+  const pathname = usePathname();
+  
+  if (pathname !== '/' && !pathname.startsWith('/consultations') && !pathname.startsWith('/payments')) {
+    return null;
+  }
+
+  const targetHref = pathname.startsWith('/payments') ? "/payments?new=true" : "/consultations?new=true";
+
   return (
     <Link 
-      href="/consultations?new=true"
+      href={targetHref}
       style={{ 
         position: 'fixed', 
         bottom: '2rem', 
