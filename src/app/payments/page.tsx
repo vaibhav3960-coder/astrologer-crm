@@ -2,6 +2,7 @@ import { IndianRupee, Download, ArrowUpRight, Clock } from "lucide-react";
 import AddPaymentModal from "@/components/payments/AddPaymentModal";
 import MarkPaidButton from "@/components/payments/MarkPaidButton";
 import { prisma } from "@/lib/prisma";
+import { Suspense } from "react";
 
 export default async function PaymentsPage() {
   const clients = await prisma.client.findMany({ orderBy: { name: 'asc' } });
@@ -32,7 +33,9 @@ export default async function PaymentsPage() {
         </button>
       </div>
 
-      <AddPaymentModal clients={clients} />
+      <Suspense fallback={null}>
+        <AddPaymentModal clients={clients} />
+      </Suspense>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.5rem', marginBottom: '2rem' }}>
         <div className="glass" style={{ padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
