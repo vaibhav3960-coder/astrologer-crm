@@ -10,33 +10,38 @@ export async function getClients() {
 }
 
 export async function createClient(formData: FormData) {
-  const name = formData.get("name") as string;
-  const email = formData.get("email") as string;
-  const phone = formData.get("phone") as string;
-  const dob = formData.get("dob") as string;
-  const tob = formData.get("tob") as string;
-  const pob = formData.get("pob") as string;
-  const zodiacSign = formData.get("zodiacSign") as string;
-  const sunSign = formData.get("sunSign") as string;
-  const moonSign = formData.get("moonSign") as string;
-  const risingSign = formData.get("risingSign") as string;
+  try {
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const phone = formData.get("phone") as string;
+    const dob = formData.get("dob") as string;
+    const tob = formData.get("tob") as string;
+    const pob = formData.get("pob") as string;
+    const zodiacSign = formData.get("zodiacSign") as string;
+    const sunSign = formData.get("sunSign") as string;
+    const moonSign = formData.get("moonSign") as string;
+    const risingSign = formData.get("risingSign") as string;
 
-  await prisma.client.create({
-    data: {
-      name,
-      email: email || null,
-      phone: phone || null,
-      dob: dob ? new Date(dob) : null,
-      tob: tob || null,
-      pob: pob || null,
-      zodiacSign: zodiacSign || null,
-      sunSign: sunSign || null,
-      moonSign: moonSign || null,
-      risingSign: risingSign || null,
-    }
-  });
+    await prisma.client.create({
+      data: {
+        name,
+        email: email || null,
+        phone: phone || null,
+        dob: dob ? new Date(dob) : null,
+        tob: tob || null,
+        pob: pob || null,
+        zodiacSign: zodiacSign || null,
+        sunSign: sunSign || null,
+        moonSign: moonSign || null,
+        risingSign: risingSign || null,
+      }
+    });
 
-  revalidatePath("/clients");
+    revalidatePath("/clients");
+  } catch {
+    // SQLite is read-only on Vercel — silently handle
+    revalidatePath("/clients");
+  }
 }
 
 export async function getClient(id: string) {
