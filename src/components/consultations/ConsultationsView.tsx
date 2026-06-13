@@ -37,8 +37,8 @@ export default function ConsultationsView({ consultations }: { consultations: an
       </div>
 
       <div className={styles.listWrapper}>
-        <h2 style={{ marginTop: 0, color: 'var(--primary-light)' }} suppressHydrationWarning>
-          Consultations on {selectedDate.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' })}
+        <h2 style={{ marginTop: 0, color: 'var(--primary-light)' }}>
+          Consultations on {selectedDate.toISOString().split('T')[0]}
         </h2>
 
         {selectedConsultations.length === 0 ? (
@@ -51,8 +51,8 @@ export default function ConsultationsView({ consultations }: { consultations: an
               <div key={c.id} className="glass" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                    <div style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--primary)' }} suppressHydrationWarning>
-                      {new Date(c.date).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}
+                    <div style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--primary)' }}>
+                      {new Date(c.date).toISOString().split('T')[1].substring(0, 5)}
                     </div>
                     <div>
                       <div style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{c.type}</div>

@@ -44,7 +44,7 @@ export default function RemediesFilterableList({ remedies }: { remedies: any[] }
             <div key={r.id} className="glass" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <span style={{ fontSize: '0.8rem', padding: '0.2rem 0.6rem', background: 'rgba(245, 158, 11, 0.2)', color: 'var(--primary)', borderRadius: '999px', border: '1px solid rgba(245,158,11,0.3)' }}>{r.type}</span>
-                <span style={{ fontSize: '0.8rem', opacity: 0.6 }} suppressHydrationWarning>{new Date(r.assignedAt).toLocaleDateString()}</span>
+                <span style={{ fontSize: '0.8rem', opacity: 0.6 }}>{new Date(r.assignedAt).toISOString().split('T')[0]}</span>
               </div>
               <div>
                 <h3 style={{ margin: '0 0 0.25rem 0', fontSize: '1.1rem' }}>{r.name}</h3>
