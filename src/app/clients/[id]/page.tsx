@@ -5,12 +5,10 @@ import { ArrowLeft, Sun, Moon, ArrowUpRight } from "lucide-react";
 import BirthChart from "@/components/clients/BirthChart";
 import PrintButton from "@/components/clients/PrintButton";
 import styles from "./page.module.css";
-import { prisma } from "@/lib/prisma";
 
-export async function generateStaticParams() {
-  const clients = await prisma.client.findMany({ select: { id: true } });
-  return clients.map((c) => ({ id: c.id }));
-}
+
+
+export const dynamic = "force-dynamic";
 
 type Props = {
   params: Promise<{ id: string }>;

@@ -62,14 +62,14 @@ export default function ClientsDataTable({ initialClients }: { initialClients: a
               <tr key={client.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', transition: 'background-color 0.2s' }}>
                 <td style={{ padding: '1rem' }}>
                   <div style={{ fontWeight: '600', color: 'var(--primary-light)' }}>{client.name}</div>
-                  <div style={{ fontSize: '0.8rem', opacity: 0.6 }}>Joined {new Date(client.createdAt).toLocaleDateString()}</div>
+                  <div style={{ fontSize: '0.8rem', opacity: 0.6 }} suppressHydrationWarning>Joined {new Date(client.createdAt).toLocaleDateString()}</div>
                 </td>
                 <td style={{ padding: '1rem' }}>
                   <div style={{ fontSize: '0.9rem' }}>{client.email || '-'}</div>
                   <div style={{ fontSize: '0.85rem', opacity: 0.7 }}>{client.phone || '-'}</div>
                 </td>
                 <td style={{ padding: '1rem' }}>
-                  <div style={{ fontSize: '0.9rem' }}>{client.dob ? new Date(client.dob).toLocaleDateString() : '-'} {client.tob ? `at ${client.tob}` : ''}</div>
+                  <div style={{ fontSize: '0.9rem' }} suppressHydrationWarning>{client.dob ? new Date(client.dob).toLocaleDateString() : '-'} {client.tob ? `at ${client.tob}` : ''}</div>
                   <div style={{ fontSize: '0.85rem', opacity: 0.7 }}>{client.pob || '-'}</div>
                 </td>
                 <td style={{ padding: '1rem' }}>
